@@ -1,0 +1,141 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+---
+
+<BaseLayout
+  title="Robot Süpürge Yedek Parça Bursa | Orijinal Parça - Esginler Teknik Servis"
+  description="Bursa'da robot süpürge orijinal yedek parça satışı. Batarya, fırça, filtre, sensör, motor, tekerlek. Tüm markalar. 0224 211 22 13"
+  canonical="/robot-supurge-yedek-parca"
+>
+  <Breadcrumb items={[{ name: 'Yedek Parça' }]} />
+
+  <section class="section-padding bg-gradient-to-br from-primary to-blue-900">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div>
+          <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">Robot Süpürge Yedek Parça</h1>
+          <p class="text-blue-200 text-lg leading-relaxed mb-6">
+            Tüm marka ve modeller için orijinal ve uyumlu yedek parça satışı. Batarya, fırça, filtre, sensör ve daha fazlası.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <a href="tel:+902242112213" class="btn-primary">Hemen Ara</a>
+            <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+          </div>
+        </div>
+        <div class="hidden lg:block">
+          <div class="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 overflow-hidden aspect-[4/3] flex items-center justify-center">
+            <img src="/images/robot-supurge-yedek-parca.webp" alt="Robot süpürge yedek parça" class="w-full h-full object-cover" loading="eager" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+            <div class="hidden flex-col items-center justify-center text-center p-8 w-full h-full">
+              <svg class="w-12 h-12 text-white/30 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+              <span class="text-white/40 text-xs font-medium">500 x 375 px</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <h2 class="text-2xl font-bold text-primary mb-4">Orijinal Yedek Parça Çeşitlerimiz</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Esginler Teknik Servis olarak tüm robot süpürge markaları için orijinal ve yüksek kaliteli uyumlu yedek parça satışı yapıyoruz. Parçalarımız orijinallik garantili olup cihazınızın performansını en üst düzeyde tutar.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            {[
+              { title: 'Batarya', desc: 'Orijinal Li-ion bataryalar, BMS korumalı, uzun ömürlü.' },
+              { title: 'Ana Fırça & Yan Fırçalar', desc: 'Silikon ve kıl fırçalar, tüm modellere uyumlu.' },
+              { title: 'HEPA Filtre', desc: 'Orijinal HEPA filtreler, yüksek filtreleme kapasitesi.' },
+              { title: 'Sensörler', desc: 'LiDAR, cliff, bumper ve ultrasonik sensör modülleri.' },
+              { title: 'Motor & Fan', desc: 'Fırça motoru, emme motoru ve fan grupları.' },
+              { title: 'Tekerlek & Aksesuar', desc: 'Tekerlek modülleri, paspas bezi, su tankı ve diğerleri.' },
+            ].map(item => (
+              <div class="bg-light-bg rounded-xl p-5 border border-gray-100 hover:border-accent/30 transition-colors">
+                <h3 class="font-semibold text-primary mb-2">{item.title}</h3>
+                <p class="text-gray-600 text-sm">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="bg-light-bg rounded-xl p-6 border border-gray-100">
+            <h3 class="text-xl font-semibold text-primary mb-3">Desteklenen Markalar</h3>
+            <p class="text-gray-600 text-sm mb-4">Aşağıdaki marka ve modeller için yedek parça temin ediyoruz:</p>
+            <div class="flex flex-wrap gap-2">
+              {['Dreame','Roborock','Xiaomi/Mi','Ecovacs','iRobot','Samsung','Dyson','Roidmi','360','Midea','Segway Ninebot','ARORA'].map(b => (
+                <span class="bg-white px-3 py-1.5 rounded-full text-sm font-medium text-primary border border-gray-200">{b}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-primary rounded-xl p-6 text-white">
+            <h3 class="font-semibold text-lg mb-4">Parça Sorgulama</h3>
+            <p class="text-blue-200 text-sm mb-4">İhtiyacınız olan parçayı sorun, stok ve fiyat bilgisi alalım.</p>
+            <div class="space-y-3">
+              <a href="tel:+902242112213" class="flex items-center gap-3 text-blue-200 hover:text-accent transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                0224 211 22 13
+              </a>
+              <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="flex items-center gap-3 text-blue-200 hover:text-accent transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.716-1.244A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                0554 535 44 84
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-green-50 border border-green-200 rounded-xl p-5">
+            <div class="flex items-center gap-2 mb-2">
+              <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+              <h3 class="font-semibold text-green-800 text-sm">Ücretsiz Evden Alım</h3>
+            </div>
+            <p class="text-green-700 text-xs leading-relaxed mb-3">Her <strong>Pazartesi</strong> ve <strong>Perşembe</strong> Bursa içi ücretsiz evden cihaz alım ve teslim hizmeti.</p>
+            <a href="https://wa.me/905545354484?text=Merhaba%2C%20%C3%BCcretsiz%20evden%20al%C4%B1m%20hizmeti%20i%C3%A7in%20randevu%20almak%20istiyorum." target="_blank" rel="noopener" class="inline-flex items-center gap-1.5 bg-green-600 text-white text-xs font-semibold px-3 py-2 rounded-lg hover:bg-green-700 transition-colors">
+              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.716-1.244A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+              Randevu Al
+            </a>
+          </div>
+
+          <div class="bg-accent/5 border border-accent/20 rounded-xl p-6">
+            <h3 class="font-semibold text-primary mb-2">Neden Biz?</h3>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                %100 orijinal parça garantisi
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Uygun fiyat
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Profesyonel montaj hizmeti
+              </li>
+              <li class="flex items-start gap-2">
+                <svg class="w-4 h-4 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Parça garantisi
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gradient-to-r from-accent to-orange-600">
+    <div class="container-custom text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Yedek Parça mı Arıyorsunuz?</h2>
+      <p class="text-orange-100 mb-6">Aradığınız parçayı sorun, stok ve fiyat bilgisi verelim!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+902242112213" class="btn-secondary">Hemen Ara: 0224 211 22 13</a>
+        <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,123 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const brand = 'Midea';
+const models = ['Midea M7 Pro', 'Midea S8+', 'Midea i5C'];
+---
+
+<BaseLayout
+  title={`${brand} Robot Süpürge Tamiri Bursa | Yetkili Servis - Esginler`}
+  description={`Bursa'da ${brand} robot süpürge tamiri ve bakımı. ${models.slice(0,3).join(', ')} ve tüm modeller. Orijinal yedek parça, ücretsiz teşhis. 0224 211 22 13`}
+  canonical={`/markalar/midea`}
+>
+  <Breadcrumb items={[{ name: 'Markalar', href: '/' }, { name: brand }]} />
+
+  <section class="section-padding bg-gradient-to-br from-primary to-blue-900">
+    <div class="container-custom">
+      <div class="max-w-3xl">
+        <h1 class="text-3xl md:text-4xl font-bold text-white mb-4">{brand} Robot Süpürge Tamiri Bursa</h1>
+        <p class="text-blue-200 text-lg leading-relaxed mb-6">
+          {brand} robot süpürgenizin tüm arızalarında profesyonel tamir ve bakım hizmeti. Orijinal yedek parça garantisi ile güvenilir çözümler.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="tel:+902242112213" class="btn-primary">Hemen Ara</a>
+          <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="lg:col-span-2 space-y-8">
+          <div>
+            <h2 class="text-2xl font-bold text-primary mb-4">{brand} Teknik Servis Hizmetlerimiz</h2>
+            <p class="text-gray-600 leading-relaxed mb-4">
+              Esginler Teknik Servis olarak {brand} robot süpürgelerin tüm model ve serilerine teknik servis hizmeti veriyoruz. Anakart tamiri, batarya değişimi, sensör onarımı, motor değişimi ve yazılım güncelleme gibi tüm işlemler uzman kadromuz tarafından gerçekleştirilir.
+            </p>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-primary mb-4">Sık Karşılaşılan {brand} Arızaları</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                'Emme gücü düşmesi',
+                'Batarya sorunları',
+                'Sensör arızaları',
+                'Fırça motoru gürültüsü',
+                'Navigasyon hatası',
+                'Şarj istasyonu arızası',
+              ].map(item => (
+                <div class="flex items-start gap-3 bg-light-bg rounded-lg p-3">
+                  <svg class="w-5 h-5 text-accent shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  <span class="text-gray-600 text-sm">{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 class="text-xl font-semibold text-primary mb-4">Desteklenen {brand} Modelleri</h3>
+            <div class="flex flex-wrap gap-2">
+              {models.map(m => (
+                <span class="bg-light-bg px-3 py-1.5 rounded-full text-sm font-medium text-primary border border-gray-200">{m}</span>
+              ))}
+              <span class="bg-accent/10 px-3 py-1.5 rounded-full text-sm font-medium text-accent border border-accent/20">+ Tüm Modeller</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="bg-primary rounded-xl p-6 text-white">
+            <h3 class="font-semibold text-lg mb-4">{brand} Servis Randevusu</h3>
+            <div class="space-y-3">
+              <a href="tel:+902242112213" class="flex items-center gap-3 text-blue-200 hover:text-accent transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                0224 211 22 13
+              </a>
+              <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="flex items-center gap-3 text-blue-200 hover:text-accent transition-colors">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.612.638l4.716-1.244A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+                0554 535 44 84
+              </a>
+            </div>
+            <div class="mt-4 pt-4 border-t border-blue-800">
+              <p class="text-blue-200 text-sm">Pzt - Cmt: 09:00 - 18:00</p>
+            </div>
+          </div>
+
+          <div class="bg-light-bg rounded-xl p-6 border border-gray-100">
+            <h3 class="font-semibold text-primary mb-3">Hizmetlerimiz</h3>
+            <ul class="space-y-2">
+              {[
+                { name: 'Robot Süpürge Tamiri', href: '/robot-supurge-tamiri' },
+                { name: 'Batarya Değişimi', href: '/robot-supurge-batarya-degisimi' },
+                { name: 'Robot Süpürge Bakımı', href: '/robot-supurge-bakimi' },
+                { name: 'Yedek Parça', href: '/robot-supurge-yedek-parca' },
+              ].map(s => (
+                <li>
+                  <a href={s.href} class="text-sm text-gray-600 hover:text-accent transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    {s.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gradient-to-r from-accent to-orange-600">
+    <div class="container-custom text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">{brand} Robot Süpürgeniz Arızalı mı?</h2>
+      <p class="text-orange-100 mb-6">Ücretsiz arıza teşhisi için hemen bizi arayın!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+902242112213" class="btn-secondary">Hemen Ara: 0224 211 22 13</a>
+        <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

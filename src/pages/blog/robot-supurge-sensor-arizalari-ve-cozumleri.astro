@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+---
+
+<BaseLayout
+  title="Robot Süpürge Sensör Arızaları ve Çözümleri | Esginler"
+  description="LiDAR, cliff ve bumper sensör arızalarının nedenleri ve çözüm yolları."
+  canonical="/blog/robot-supurge-sensor-arizalari-ve-cozumleri"
+>
+  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: 'Robot Süpürge Sensör Arızaları ve Çözümleri' }]} />
+
+  <!-- Hero -->
+  <section class="section-padding bg-gradient-to-br from-primary to-blue-900">
+    <div class="container-custom">
+      <div class="max-w-3xl">
+        <time class="text-blue-300 text-sm font-medium">20 Kasım 2025</time>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">Robot Süpürge Sensör Arızaları ve Çözümleri</h1>
+        <p class="text-blue-200 text-lg leading-relaxed">
+          Sensörler, robot süpürgenizin gözleri ve kulaklarıdır. Arızalı bir sensör, cihazınızın verimli çalışmasını engeller ve temizlik kalitesini düşürür.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <section class="section-padding">
+    <div class="container-custom">
+      <article class="max-w-3xl">
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Robot Süpürgelerde Sensör Türleri</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Modern robot süpürgeler, akıllı navigasyon ve güvenli temizlik için birden fazla sensör tipini bir arada kullanır. Her sensörün kendine özgü görevi vardır ve herhangi birindeki arıza farklı sorunlara yol açar. Bursa'da robot süpürge tamiri deneyimimizle en sık karşılaşılan sensör sorunlarını ve çözüm yollarını sizlerle paylaşıyoruz.
+        </p>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">LiDAR Sensör Arızaları</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          LiDAR (Light Detection and Ranging) sensörü, genellikle cihazın üst kısmındaki dönen kule içinde yer alır ve odanın haritasını çıkarır. Bu sensör sayesinde robot süpürgeniz evinizi tanır ve sistematik temizlik yapar.
+        </p>
+        <h3 class="text-xl font-bold text-primary mb-3">Yaygın LiDAR Sorunları</h3>
+        <ul class="space-y-2 text-gray-600 leading-relaxed mb-4">
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Kulenin dönmemesi:</strong> Toz birikmesi veya motor arızası nedeniyle LiDAR kulesi dönmeyi durdurabilir. İlk adım olarak kule etrafını yumuşak bir fırça ile temizleyin.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Harita oluşturamama:</strong> Sensör camı kirli veya çizikli olduğunda lazer ışını doğru yansımaz. Mikrofiber bezle hafifçe silin.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span><strong>Yanlış konum algılama:</strong> Robot sürekli kayboluyorsa LiDAR kalibrasyonu bozulmuş olabilir; bu durumda teknik servis müdahalesi gerekir.</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Cliff (Uçurum) Sensör Arızaları</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Cliff sensörleri cihazın alt kısmında bulunur ve merdiven kenarları gibi yükseklik farklarını algılayarak robotun düşmesini engeller. Bu sensörlerin arızalanması ciddi sonuçlara yol açabilir.
+        </p>
+        <h3 class="text-xl font-bold text-primary mb-3">Belirtiler ve Çözümler</h3>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Robot süpürgeniz düz zeminde bile "uçurum algılandı" hatası veriyorsa veya merdivenden düşüyorsa cliff sensörlerinde sorun vardır. Sensörlerin üzerindeki tozu kuru bir bezle silin. Koyu renkli halılar da yanlış algılamaya neden olabilir. Temizliğe rağmen sorun devam ediyorsa sensörün değiştirilmesi gerekebilir.
+        </p>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Bumper (Tampon) Sensör Arızaları</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Bumper sensörü, robot süpürgenin ön tamponunda yer alır ve nesnelere çarptığında yön değiştirmesini sağlar. Tampon sıkışması veya yay mekanizmasının bozulması en yaygın arıza nedenleridir.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Tampon her iki yöne de serbestçe hareket etmeli ve bırakıldığında eski konumuna dönmelidir. Sıkışma varsa, tampon kenarlarında biriken toz ve kılları temizleyin. Mekanik hasar durumunda profesyonel robot süpürge tamiri gereklidir.
+        </p>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Ultrasonik ve Duvar Sensörleri</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Ultrasonik sensörler halı algılama ve duvar takibi için kullanılır. Bu sensörler arızalandığında robot halıda emme gücünü artıramaz veya duvar kenarlarını düzgün temizleyemez. Sensör yüzeylerini düzenli olarak nemli bir bezle silmek çoğu sorunu önler.
+        </p>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Sensör Bakımı İçin Genel İpuçları</h2>
+        <ul class="space-y-2 text-gray-600 leading-relaxed mb-4">
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Tüm sensörleri haftada bir kez yumuşak ve kuru bir bezle silin.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Sensör camlarına asla kimyasal temizleyici uygulamayın.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Cihazınızı nemli ortamlarda bırakmayın; nem sensör bozulmalarının başlıca nedenlerindendir.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <svg class="w-5 h-5 text-accent mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span>Firmware güncellemelerini düzenli yapın; yazılım güncellemeleri sensör kalibrasyonunu iyileştirir.</span>
+          </li>
+        </ul>
+
+        <h2 class="text-2xl font-bold text-primary mb-4">Sensör Tamiri İçin Esginler Teknik Servis</h2>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Basit temizlik ve bakım işlemleriyle çözemediğiniz sensör arızalarında profesyonel desteğe ihtiyacınız var. <strong>Esginler Teknik Servis</strong> olarak Bursa'da tüm marka robot süpürgelerin sensör tamiri ve değişimini gerçekleştiriyoruz. LiDAR motor değişimi, cliff sensör kalibrasyonu ve bumper mekanizma onarımı gibi işlemleri uzman kadromuzla kısa sürede tamamlıyoruz.
+        </p>
+        <p class="text-gray-600 leading-relaxed mb-4">
+          Sensör arızası yaşıyorsanız, ücretsiz arıza teşhisi için bizi arayın veya WhatsApp üzerinden detay paylaşın. Teknik servis ekibimiz en kısa sürede size dönüş yapacaktır.
+        </p>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section-padding bg-gradient-to-r from-accent to-orange-600">
+    <div class="container-custom text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Sensör Arızası mı Yaşıyorsunuz?</h2>
+      <p class="text-orange-100 mb-6">Profesyonel sensör tamiri için hemen bize ulaşın!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+902242112213" class="btn-secondary">Hemen Ara: 0224 211 22 13</a>
+        <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

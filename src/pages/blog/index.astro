@@ -1,0 +1,88 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const posts = [
+  {
+    title: 'Robot Süpürge Bataryası Ne Zaman Değiştirilmeli?',
+    excerpt: 'Robot süpürgenizin bataryasının ömrünü nasıl anlarsınız? Batarya değişimi belirtileri ve dikkat edilmesi gerekenler.',
+    date: '2025-12-15',
+    slug: 'robot-supurge-bataryasi-ne-zaman-degistirilmeli',
+    category: 'Bakım',
+  },
+  {
+    title: 'Robot Süpürge Sensör Arızaları ve Çözümleri',
+    excerpt: 'LiDAR, cliff ve bumper sensör arızalarının nedenleri ve evde yapabileceğiniz basit çözümler.',
+    date: '2025-11-20',
+    slug: 'robot-supurge-sensor-arizalari-ve-cozumleri',
+    category: 'Tamir',
+  },
+  {
+    title: 'Robot Süpürge Bakımı: 5 Altın Kural',
+    excerpt: 'Robot süpürgenizin ömrünü uzatmak ve performansını korumak için düzenli olarak yapmanız gereken 5 bakım adımı.',
+    date: '2025-10-10',
+    slug: 'robot-supurge-bakimi-5-altin-kural',
+    category: 'Bakım',
+  },
+  {
+    title: 'Dreame vs Roborock: Hangisi Daha İyi?',
+    excerpt: 'İki popüler robot süpürge markasını karşılaştırıyoruz. Performans, fiyat ve dayanıklılık açısından detaylı inceleme.',
+    date: '2025-09-05',
+    slug: 'dreame-vs-roborock-karsilastirma',
+    category: 'İnceleme',
+  },
+];
+
+function formatDate(dateStr: string) {
+  return new Date(dateStr).toLocaleDateString('tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout
+  title="Blog | Robot Süpürge Bakım ve Tamir Rehberi - Esginler Teknik Servis"
+  description="Robot süpürge bakımı, tamir rehberi ve kullanım ipuçları. Batarya ömrü, sensör arızaları, marka karşılaştırmaları ve daha fazlası."
+  canonical="/blog"
+>
+  <Breadcrumb items={[{ name: 'Blog' }]} />
+
+  <section class="section-padding">
+    <div class="container-custom">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-primary mb-3">Blog</h1>
+        <p class="text-gray-600 max-w-2xl mx-auto">Robot süpürge bakımı, tamir ipuçları ve teknoloji haberleri.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+        {posts.map(post => (
+          <article class="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden group">
+            <div class="bg-gradient-to-br from-primary/5 to-accent/5 p-6 pb-4">
+              <span class="inline-block bg-accent/10 text-accent text-xs font-semibold px-2.5 py-1 rounded-full mb-3">{post.category}</span>
+              <h2 class="text-lg font-bold text-primary group-hover:text-accent transition-colors mb-2">
+                <a href={`/blog/${post.slug}`} class="hover:text-accent">{post.title}</a>
+              </h2>
+              <p class="text-gray-600 text-sm leading-relaxed">{post.excerpt}</p>
+            </div>
+            <div class="px-6 py-3 border-t border-gray-100 flex items-center justify-between">
+              <time class="text-xs text-gray-400">{formatDate(post.date)}</time>
+              <a href={`/blog/${post.slug}`} class="text-accent text-sm font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                Devamını Oku
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gradient-to-r from-accent to-orange-600">
+    <div class="container-custom text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Robot Süpürgeniz Arızalı mı?</h2>
+      <p class="text-orange-100 mb-6">Profesyonel teknik servis için hemen bizi arayın!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+902242112213" class="btn-secondary">Hemen Ara: 0224 211 22 13</a>
+        <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
