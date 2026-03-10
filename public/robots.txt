@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://robotsupurgetamiribursa.com/sitemap.xml
+Sitemap: https://robotsupurgetamiribursa.com/sitemap-index.xml

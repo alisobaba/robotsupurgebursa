@@ -2,14 +2,14 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 
-const brand = '360';
-const models = ['360 S7', '360 S7 Pro', '360 S9', '360 S10'];
+const brand = 'Arçelik';
+const models = ['Arçelik R9', 'Arçelik R10', 'Arçelik R11', 'Arçelik Robot Süpürge'];
 ---
 
 <BaseLayout
   title={`${brand} Robot Süpürge Tamiri Bursa | Yetkili Servis - Esginler`}
   description={`Bursa'da ${brand} robot süpürge tamiri ve bakımı. ${models.slice(0,3).join(', ')} ve tüm modeller. Orijinal yedek parça, ücretsiz teşhis. 0224 211 22 13`}
-  canonical={`/markalar/360`}
+  canonical={`/markalar/arcelik`}
 >
   <Breadcrumb items={[{ name: 'Markalar', href: '/' }, { name: brand }]} />
 

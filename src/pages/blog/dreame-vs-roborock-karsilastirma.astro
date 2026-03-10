@@ -1,14 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const title = 'Dreame vs Roborock: Hangisi Daha İyi?';
+const description = 'Dreame ve Roborock robot süpürge markalarının detaylı karşılaştırması.';
+const datePublished = '2025-09-05';
+const canonicalPath = '/blog/dreame-vs-roborock-karsilastirma';
+const siteUrl = 'https://robotsupurgetamiribursa.com';
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished,
+  dateModified: datePublished,
+  author: { '@type': 'Organization', name: 'Esginler Teknik Servis', url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Esginler Teknik Servis',
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/og-default.webp` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}${canonicalPath}` },
+};
 ---
 
 <BaseLayout
-  title="Dreame vs Roborock: Hangisi Daha İyi? | Esginler"
-  description="Dreame ve Roborock robot süpürge markalarının detaylı karşılaştırması."
-  canonical="/blog/dreame-vs-roborock-karsilastirma"
+  title={`${title} | Esginler`}
+  description={description}
+  canonical={canonicalPath}
 >
-  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: 'Dreame vs Roborock: Hangisi Daha İyi?' }]} />
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: title }]} />
 
   <!-- Hero -->
   <section class="section-padding bg-gradient-to-br from-primary to-blue-900">

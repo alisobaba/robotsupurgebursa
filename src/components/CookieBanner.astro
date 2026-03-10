@@ -1,0 +1,43 @@
+---
+---
+<div id="cookie-banner" class="fixed bottom-0 left-0 right-0 z-[100] p-4 bg-white border-t border-gray-200 shadow-lg hidden" role="dialog" aria-label="Çerez bildirimi">
+  <div class="container-custom flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+    <p class="text-sm text-gray-700">
+      Sitemizde deneyiminizi iyileştirmek ve ziyaret istatistiklerini (Google Analytics) takip edebilmek için çerezler kullanıyoruz.
+      <a href="/gizlilik" class="text-primary underline font-medium">Gizlilik metni</a> ve
+      <a href="https://www.kvkk.gov.tr" target="_blank" rel="noopener" class="text-primary underline font-medium">KVKK</a> kapsamında tercihinizi belirtebilirsiniz.
+    </p>
+    <div class="flex gap-3 shrink-0">
+      <button type="button" id="cookie-reject" class="px-4 py-2.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+        Reddet
+      </button>
+      <button type="button" id="cookie-accept" class="px-4 py-2.5 text-sm font-medium text-white bg-primary rounded-lg hover:bg-blue-900 transition-colors">
+        Kabul Et
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  (function() {
+    var COOKIE_CONSENT_KEY = 'esginler_cookie_consent';
+    var banner = document.getElementById('cookie-banner');
+    var path = (window.location.pathname || '');
+    if (path === '/admin' || path.indexOf('/admin/') === 0) return;
+    try {
+      var consent = localStorage.getItem(COOKIE_CONSENT_KEY);
+      if (consent === null) banner.classList.remove('hidden');
+    } catch (e) {}
+    function hide() { if (banner) banner.classList.add('hidden'); }
+    function accept() {
+      try { localStorage.setItem(COOKIE_CONSENT_KEY, 'accept'); } catch (e) {}
+      hide();
+      window.dispatchEvent(new CustomEvent('cookie-consent-accept'));
+    }
+    function reject() {
+      try { localStorage.setItem(COOKIE_CONSENT_KEY, 'reject'); } catch (e) {}
+      hide();
+    }
+    document.getElementById('cookie-accept')?.addEventListener('click', accept);
+    document.getElementById('cookie-reject')?.addEventListener('click', reject);
+  })();
+</script>

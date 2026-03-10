@@ -1,14 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const title = 'Robot Süpürge Bakımı: 5 Altın Kural';
+const description = "Robot süpürgenizin ömrünü uzatmak için 5 önemli bakım kuralı.";
+const datePublished = '2025-10-10';
+const canonicalPath = '/blog/robot-supurge-bakimi-5-altin-kural';
+const siteUrl = 'https://robotsupurgetamiribursa.com';
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished,
+  dateModified: datePublished,
+  author: { '@type': 'Organization', name: 'Esginler Teknik Servis', url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Esginler Teknik Servis',
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/og-default.webp` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}${canonicalPath}` },
+};
 ---
 
 <BaseLayout
-  title="Robot Süpürge Bakımı: 5 Altın Kural | Esginler"
-  description="Robot süpürgenizin ömrünü uzatmak için 5 önemli bakım kuralı."
-  canonical="/blog/robot-supurge-bakimi-5-altin-kural"
+  title={`${title} | Esginler`}
+  description={description}
+  canonical={canonicalPath}
 >
-  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: 'Robot Süpürge Bakımı: 5 Altın Kural' }]} />
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: title }]} />
 
   <!-- Hero -->
   <section class="section-padding bg-gradient-to-br from-primary to-blue-900">

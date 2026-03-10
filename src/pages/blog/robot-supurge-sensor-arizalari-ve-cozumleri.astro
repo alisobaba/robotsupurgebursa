@@ -1,14 +1,38 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const title = 'Robot Süpürge Sensör Arızaları ve Çözümleri';
+const description = 'LiDAR, cliff ve bumper sensör arızalarının nedenleri ve çözüm yolları.';
+const datePublished = '2025-11-20';
+const canonicalPath = '/blog/robot-supurge-sensor-arizalari-ve-cozumleri';
+const siteUrl = 'https://robotsupurgetamiribursa.com';
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished,
+  dateModified: datePublished,
+  author: { '@type': 'Organization', name: 'Esginler Teknik Servis', url: siteUrl },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Esginler Teknik Servis',
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/images/og-default.webp` },
+  },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}${canonicalPath}` },
+};
 ---
 
 <BaseLayout
-  title="Robot Süpürge Sensör Arızaları ve Çözümleri | Esginler"
-  description="LiDAR, cliff ve bumper sensör arızalarının nedenleri ve çözüm yolları."
-  canonical="/blog/robot-supurge-sensor-arizalari-ve-cozumleri"
+  title={`${title} | Esginler`}
+  description={description}
+  canonical={canonicalPath}
 >
-  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: 'Robot Süpürge Sensör Arızaları ve Çözümleri' }]} />
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  </Fragment>
+  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: title }]} />
 
   <!-- Hero -->
   <section class="section-padding bg-gradient-to-br from-primary to-blue-900">

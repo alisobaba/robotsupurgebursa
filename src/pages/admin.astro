@@ -1,0 +1,661 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Yönetim Paneli | Esginler"
+  description="Site yönetimi"
+  noindex={true}
+>
+  <div id="admin-app" class="min-h-screen bg-gray-100">
+    <!-- Giriş ekranı -->
+    <div id="login-screen" class="min-h-screen flex items-center justify-center p-4">
+      <div class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
+        <div class="text-center mb-8">
+          <div class="w-14 h-14 bg-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          </div>
+          <h1 class="text-xl font-bold text-primary">Yönetim Paneli</h1>
+          <p class="text-gray-500 text-sm mt-1">E-posta ve şifre ile giriş yapın</p>
+        </div>
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">E-posta</label>
+            <input type="email" id="login-email" required placeholder="ornek@email.com" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Şifre</label>
+            <input type="password" id="login-password" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+          <p id="login-error" class="text-red-600 text-sm hidden">E-posta veya şifre hatalı.</p>
+          <button type="submit" class="w-full py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-900 transition-colors">
+            Giriş Yap
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Panel (giriş sonrası) -->
+    <div id="panel-screen" class="hidden min-h-screen">
+      <header class="bg-primary text-white shadow">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span class="font-bold text-lg">Esginler Yönetim</span>
+            <span class="text-blue-200 text-sm hidden sm:inline">Site ayarları & Blog</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <span id="admin-email-display" class="text-blue-200 text-sm truncate max-w-[180px]"></span>
+            <button type="button" id="btn-logout" class="text-sm bg-white/10 hover:bg-white/20 px-3 py-1.5 rounded-lg transition-colors">Çıkış</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="max-w-6xl mx-auto px-4 py-6">
+        <!-- Sekmeler -->
+        <div class="flex gap-2 mb-6 border-b border-gray-200">
+          <button type="button" data-tab="site" class="admin-tab px-4 py-3 font-medium text-gray-600 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors rounded-t-lg">
+            Site Ayarları
+          </button>
+          <button type="button" data-tab="blog" class="admin-tab px-4 py-3 font-medium text-gray-600 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors rounded-t-lg">
+            Blog Yazısı Ekle
+          </button>
+          <button type="button" data-tab="reviews" class="admin-tab px-4 py-3 font-medium text-gray-600 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors rounded-t-lg">
+            Müşteri Yorumları
+          </button>
+          <button type="button" data-tab="stats" class="admin-tab px-4 py-3 font-medium text-gray-600 hover:text-primary border-b-2 border-transparent hover:border-primary transition-colors rounded-t-lg">
+            İstatistikler
+          </button>
+        </div>
+
+        <!-- Site Ayarları -->
+        <div id="tab-site" class="admin-tab-content">
+          <div class="bg-white rounded-2xl shadow border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+              <h2 class="text-lg font-bold text-primary">Site Ayarları</h2>
+              <p class="text-sm text-gray-600 mt-0.5">Değerleri güncelleyip JSON oluşturun. <strong>public/config.json</strong> dosyasını cPanel’de bu içerikle değiştirin; site otomatik güncellenir.</p>
+            </div>
+            <form id="site-form" class="p-6 space-y-5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Site / Firma adı</label>
+                  <input type="text" id="cfg-siteName" value="Esginler Teknik Servis" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Çalışma saatleri</label>
+                  <input type="text" id="cfg-workingHours" value="Pzt - Cmt: 09:00 - 18:00" placeholder="Pzt - Cmt: 09:00 - 18:00" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Adres</label>
+                <input type="text" id="cfg-address" value="Yenikaraman, Sanayi Cd. No:110, 16170 Osmangazi/Bursa" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Telefon (görünen)</label>
+                  <input type="text" id="cfg-phone" value="0224 211 22 13" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Telefon (link için, 90 ile başlayan)</label>
+                  <input type="text" id="cfg-phoneRaw" value="+902242112213" placeholder="+902242112213" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none font-mono text-sm" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp (görünen)</label>
+                  <input type="text" id="cfg-whatsapp" value="0554 535 44 84" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">WhatsApp (link için, 90 ile başlayan)</label>
+                  <input type="text" id="cfg-whatsappRaw" value="905545354484" placeholder="905545354484" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none font-mono text-sm" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">İletişim formu e-posta (Formsubmit)</label>
+                  <input type="email" id="cfg-formsubmitEmail" value="teknikservisesginler@gmail.com" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Servis takip / Randevu URL</label>
+                  <input type="url" id="cfg-servistakipUrl" value="https://teknikservis.esginler.com/servistakip" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none font-mono text-sm" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Google Analytics Ölçüm ID (isteğe bağlı)</label>
+                <input type="text" id="cfg-googleAnalyticsId" value="G-3EFJ39KDNC" placeholder="G-XXXXXXXXXX" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none font-mono text-sm" />
+                <p class="text-xs text-gray-500 mt-1">İstatistikler sekmesinde günlük ziyaretçi, kaynak vb. görmek için GA4 ölçüm ID'sini girin. <a href="https://analytics.google.com" target="_blank" rel="noopener" class="text-primary underline">Google Analytics</a> üzerinden ücretsiz alabilirsiniz.</p>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button type="button" id="btn-generate-config" class="px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-900 transition-colors">
+                  config.json oluştur
+                </button>
+                <button type="button" id="btn-load-config" class="px-6 py-3 bg-gray-200 text-gray-700 font-semibold rounded-xl hover:bg-gray-300 transition-colors">
+                  Mevcut config’i yükle
+                </button>
+              </div>
+            </form>
+            <div id="config-output" class="hidden border-t border-gray-200 p-6 bg-gray-50">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-medium text-gray-700">public/config.json içeriği</span>
+                <button type="button" id="btn-copy-config" class="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-blue-900">Kopyala</button>
+              </div>
+              <pre id="config-json" class="p-4 bg-white border border-gray-200 rounded-lg text-sm overflow-x-auto max-h-64 overflow-y-auto"></pre>
+              <p class="text-xs text-gray-500 mt-3">Bu dosyayı cPanel Dosya Yöneticisi ile <strong>public/config.json</strong> konumuna yükleyin veya içeriği yapıştırın. Site birkaç saniye içinde yeni değerleri kullanır.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blog Ekle -->
+        <div id="tab-blog" class="admin-tab-content hidden">
+          <div class="bg-white rounded-2xl shadow border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+              <h2 class="text-lg font-bold text-primary">Yeni Blog Yazısı</h2>
+              <p class="text-sm text-gray-600 mt-0.5">Formu doldurup kodu oluşturun. Oluşan dosyayı projede <strong>src/pages/blog/SLUG.astro</strong> olarak kaydedin ve <strong>blog/index.astro</strong> listesine ekleyin.</p>
+            </div>
+            <form id="blog-form" class="p-6 space-y-5">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Başlık *</label>
+                  <input type="text" id="post-title" required placeholder="Örn: Robot Süpürge Filtre Bakımı" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Slug (URL) *</label>
+                  <input type="text" id="post-slug" required placeholder="robot-supurge-filtre-bakimi" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none font-mono text-sm" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Özet (liste ve SEO) *</label>
+                <textarea id="post-excerpt" rows="2" required placeholder="Kısa açıklama" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none resize-none"></textarea>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Tarih *</label>
+                  <input type="date" id="post-date" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none" />
+                </div>
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
+                  <select id="post-category" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none">
+                    <option value="Bakım">Bakım</option>
+                    <option value="Tamir">Tamir</option>
+                    <option value="İnceleme">İnceleme</option>
+                    <option value="İpuçları">İpuçları</option>
+                    <option value="Haber">Haber</option>
+                  </select>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">Kapak görseli (isteğe bağlı)</label>
+                <div class="flex flex-wrap items-center gap-3">
+                  <input type="text" id="post-image" placeholder="/images/blog/yazi-slug.webp" class="flex-1 min-w-0 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none font-mono text-sm" />
+                  <label class="flex items-center gap-2 text-sm text-gray-600">
+                    <input type="checkbox" id="post-no-image" class="rounded border-gray-300 text-accent focus:ring-accent" />
+                    Resimsiz
+                  </label>
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">İçerik (HTML) *</label>
+                <textarea id="post-content" rows="12" required placeholder="<h2>Alt başlık</h2>&#10;<p>Paragraf...</p>" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-accent outline-none font-mono text-sm resize-y"></textarea>
+              </div>
+              <button type="submit" class="px-6 py-3 bg-accent text-white font-semibold rounded-xl hover:bg-orange-600 transition-colors">
+                Blog kodu oluştur
+              </button>
+            </form>
+            <div id="blog-output" class="hidden border-t border-gray-200 p-6 bg-gray-50 space-y-6">
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium text-gray-700">1. src/pages/blog/<span id="out-slug" class="font-mono">SLUG</span>.astro</span>
+                  <button type="button" id="btn-copy-astro" class="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-blue-900">Kopyala</button>
+                </div>
+                <pre id="output-astro" class="p-4 bg-white border border-gray-200 rounded-lg text-sm overflow-x-auto max-h-80 overflow-y-auto"></pre>
+              </div>
+              <div>
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium text-gray-700">2. blog/index.astro — posts dizisine eklenecek</span>
+                  <button type="button" id="btn-copy-json" class="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-blue-900">Kopyala</button>
+                </div>
+                <pre id="output-json" class="p-4 bg-white border border-gray-200 rounded-lg text-sm overflow-x-auto"></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Müşteri Yorumları -->
+        <div id="tab-reviews" class="admin-tab-content hidden">
+          <div class="bg-white rounded-2xl shadow border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+              <h2 class="text-lg font-bold text-primary">Müşteri Yorumları</h2>
+              <p class="text-sm text-gray-600 mt-0.5">Anasayfada gösterilen yorumları buradan ekleyebilir, silebilir veya güncelleyebilirsiniz. Oluşturduğunuz <strong>reviews.json</strong> dosyasını cPanel'de <strong>public/reviews.json</strong> olarak yükleyin.</p>
+            </div>
+            <div class="p-6 space-y-6">
+              <div class="flex flex-wrap gap-3 items-center">
+                <button type="button" id="reviews-load-btn" class="px-4 py-2.5 bg-gray-200 text-gray-700 font-medium rounded-xl hover:bg-gray-300 transition-colors">
+                  Mevcut yorumları yükle
+                </button>
+                <span id="reviews-load-status" class="text-sm text-gray-500"></span>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800 mb-3">Yeni yorum ekle</h3>
+                <form id="review-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-gray-50 rounded-xl border border-gray-200">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Ad Soyad *</label>
+                    <input type="text" id="review-name" required placeholder="Örn: Ahmet Yıldız" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Puan (1-5) *</label>
+                    <select id="review-rating" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none">
+                      <option value="5">5</option>
+                      <option value="4">4</option>
+                      <option value="3">3</option>
+                      <option value="2">2</option>
+                      <option value="1">1</option>
+                    </select>
+                  </div>
+                  <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Yorum metni *</label>
+                    <textarea id="review-text" required rows="3" placeholder="Müşteri yorumu..." class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none resize-none"></textarea>
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Cihaz / model (isteğe bağlı)</label>
+                    <input type="text" id="review-device" placeholder="Örn: Roborock S7" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary outline-none" />
+                  </div>
+                  <div class="flex items-end">
+                    <button type="submit" class="px-5 py-2.5 bg-accent text-white font-semibold rounded-xl hover:bg-orange-600 transition-colors">
+                      Yorum Ekle
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-800 mb-3">Mevcut yorumlar</h3>
+                <ul id="reviews-list" class="space-y-3"></ul>
+                <p id="reviews-empty" class="text-gray-500 text-sm hidden">Henüz yorum yok. "Mevcut yorumları yükle" ile sitedeki listeyi getirin veya yeni ekleyin.</p>
+              </div>
+              <div class="flex gap-3 pt-2">
+                <button type="button" id="reviews-generate-btn" class="px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-900 transition-colors">
+                  reviews.json oluştur
+                </button>
+              </div>
+            </div>
+            <div id="reviews-output" class="hidden border-t border-gray-200 p-6 bg-gray-50">
+              <div class="flex items-center justify-between mb-3">
+                <span class="font-medium text-gray-700">public/reviews.json içeriği</span>
+                <div class="flex gap-2">
+                  <button type="button" id="reviews-copy-btn" class="text-sm bg-primary text-white px-3 py-1.5 rounded-lg hover:bg-blue-900">Kopyala</button>
+                  <a id="reviews-download-btn" href="#" download="reviews.json" class="text-sm bg-gray-600 text-white px-3 py-1.5 rounded-lg hover:bg-gray-700">İndir</a>
+                </div>
+              </div>
+              <pre id="reviews-json" class="p-4 bg-white border border-gray-200 rounded-lg text-sm overflow-x-auto max-h-64 overflow-y-auto"></pre>
+              <p class="text-xs text-gray-500 mt-3">Bu dosyayı cPanel Dosya Yöneticisi ile <strong>public/reviews.json</strong> konumuna yükleyin. Anasayfa yorumları bu dosyadan okunur.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- İstatistikler -->
+        <div id="tab-stats" class="admin-tab-content hidden">
+          <div class="bg-white rounded-2xl shadow border border-gray-200 overflow-hidden">
+            <div class="bg-gray-50 border-b border-gray-200 px-6 py-4">
+              <h2 class="text-lg font-bold text-primary">Ziyaretçi İstatistikleri</h2>
+              <p class="text-sm text-gray-600 mt-0.5">Günlük ziyaretçi sayısı, nereden geldikleri (arama, sosyal medya, doğrudan), hangi sayfaların görüntülendiği ve cihaz bilgisi Google Analytics 4 ile takip edilir. Sayım mantığı Jetpack/GA4 gibi: bir kişi birden fazla sayfa açsa bile oturum (session) bazında sayılır; her sayfa +1 değildir.</p>
+            </div>
+            <div class="p-6 space-y-6">
+              <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl">
+                <h3 class="font-semibold text-primary mb-2">Kurulum</h3>
+                <ol class="list-decimal list-inside text-sm text-gray-700 space-y-1">
+                  <li><a href="https://analytics.google.com" target="_blank" rel="noopener" class="text-primary underline">Google Analytics</a> hesabı açın (veya mevcut hesabı kullanın).</li>
+                  <li>Yeni bir "Özellik" (GA4 property) oluşturun, "Web" seçin ve site adresinizi girin.</li>
+                  <li>Ölçüm kimliğini alın (<strong>G-XXXXXXXXXX</strong> formatında).</li>
+                  <li>Admin → <strong>Site Ayarları</strong> sekmesinde "Google Analytics Ölçüm ID" alanına bu kodu yapıştırın.</li>
+                  <li>"config.json oluştur" deyip çıkan dosyayı <strong>public/config.json</strong> olarak cPanel'e yükleyin.</li>
+                </ol>
+              </div>
+              <div class="flex flex-wrap items-center gap-4">
+                <a id="stats-ga-link" href="https://analytics.google.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-6 py-3 bg-primary text-white font-semibold rounded-xl hover:bg-blue-900 transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                  Google Analytics'te aç
+                </a>
+                <span id="stats-ga-id-display" class="text-sm text-gray-500"></span>
+              </div>
+              <div class="text-sm text-gray-600 space-y-2">
+                <p><strong>GA4'te görebileceğiniz örnekler:</strong></p>
+                <ul class="list-disc list-inside pl-2">
+                  <li>Günlük / haftalık / aylık kullanıcı ve oturum sayıları</li>
+                  <li>Trafik kaynağı (Google, doğrudan, sosyal, referans siteler)</li>
+                  <li>En çok görüntülenen sayfalar</li>
+                  <li>Cihaz türü (mobil, masaüstü, tablet) ve konum</li>
+                </ul>
+                <p class="pt-2">Veriler genelde 24–48 saat içinde raporlarda görünür. Ölçüm ID'sini ekledikten sonra birkaç gün bekleyin.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_EMAIL = 'teknikservisesginler@gmail.com';
+    const ADMIN_PASSWORD = 'Esginler123!';
+    const STORAGE_KEY = 'esginler_admin';
+
+    const loginScreen = document.getElementById('login-screen');
+    const panelScreen = document.getElementById('panel-screen');
+    const loginForm = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+
+    function checkAuth() {
+      try {
+        const raw = sessionStorage.getItem(STORAGE_KEY);
+        if (!raw) return false;
+        const { email, at } = JSON.parse(raw);
+        if (email !== ADMIN_EMAIL) return false;
+        if (Date.now() - at > 24 * 60 * 60 * 1000) { sessionStorage.removeItem(STORAGE_KEY); return false; }
+        return true;
+      } catch { return false; }
+    }
+
+    function setAuth(email) {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({ email, at: Date.now() }));
+    }
+
+    function logout() {
+      sessionStorage.removeItem(STORAGE_KEY);
+      panelScreen.classList.add('hidden');
+      loginScreen.classList.remove('hidden');
+      loginError.classList.add('hidden');
+    }
+
+    if (checkAuth()) {
+      loginScreen.classList.add('hidden');
+      panelScreen.classList.remove('hidden');
+      document.getElementById('admin-email-display').textContent = ADMIN_EMAIL;
+    }
+
+    loginForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        loginError.classList.add('hidden');
+        setAuth(email);
+        loginScreen.classList.add('hidden');
+        panelScreen.classList.remove('hidden');
+        document.getElementById('admin-email-display').textContent = email;
+      } else {
+        loginError.classList.remove('hidden');
+      }
+    });
+
+    document.getElementById('btn-logout')?.addEventListener('click', logout);
+
+    // Tabs
+    document.querySelectorAll('.admin-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const t = tab.getAttribute('data-tab');
+        document.querySelectorAll('.admin-tab').forEach(x => x.classList.remove('border-primary', 'text-primary'));
+        tab.classList.add('border-primary', 'text-primary');
+        document.querySelectorAll('.admin-tab-content').forEach(c => c.classList.add('hidden'));
+        document.getElementById('tab-' + t).classList.remove('hidden');
+        if (t === 'stats') {
+          fetch((window.location.origin || '') + '/config.json').then(r => r.ok ? r.json() : null).then(cfg => {
+            const el = document.getElementById('stats-ga-id-display');
+            if (el) el.textContent = (cfg && cfg.googleAnalyticsId) ? 'Aktif ölçüm ID: ' + cfg.googleAnalyticsId : 'Henüz ölçüm ID eklenmedi. Site Ayarları\'ndan ekleyin.';
+          }).catch(() => {
+            const el = document.getElementById('stats-ga-id-display');
+            if (el) el.textContent = 'config.json yüklenemedi.';
+          });
+        }
+      });
+    });
+    document.querySelector('.admin-tab[data-tab="site"]')?.classList.add('border-primary', 'text-primary');
+
+    // Slug from title
+    function slugify(s) {
+      const tr = { 'ç':'c','ğ':'g','ı':'i','ö':'o','ş':'s','ü':'u','Ç':'c','Ğ':'g','İ':'i','Ö':'o','Ş':'s','Ü':'u' };
+      return s.split('').map(c => tr[c] || c).join('').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    }
+    document.getElementById('post-title')?.addEventListener('input', (e) => {
+      const slug = document.getElementById('post-slug');
+      if (slug && !slug.dataset.touched) slug.value = slugify(e.target.value);
+    });
+    document.getElementById('post-slug')?.addEventListener('input', () => document.getElementById('post-slug').dataset.touched = '1');
+    document.getElementById('post-no-image')?.addEventListener('change', (e) => {
+      const img = document.getElementById('post-image');
+      if (img) img.disabled = e.target.checked;
+    });
+    const dateEl = document.getElementById('post-date');
+    if (dateEl && !dateEl.value) dateEl.value = new Date().toISOString().slice(0, 10);
+
+    // Site config
+    document.getElementById('btn-generate-config')?.addEventListener('click', () => {
+      const cfg = {
+        siteName: document.getElementById('cfg-siteName').value.trim(),
+        phone: document.getElementById('cfg-phone').value.trim(),
+        phoneRaw: document.getElementById('cfg-phoneRaw').value.trim().replace(/\s/g, ''),
+        whatsapp: document.getElementById('cfg-whatsapp').value.trim(),
+        whatsappRaw: document.getElementById('cfg-whatsappRaw').value.trim().replace(/\s/g, ''),
+        address: document.getElementById('cfg-address').value.trim(),
+        workingHours: document.getElementById('cfg-workingHours').value.trim(),
+        formsubmitEmail: document.getElementById('cfg-formsubmitEmail').value.trim(),
+        servistakipUrl: document.getElementById('cfg-servistakipUrl').value.trim(),
+        googleAnalyticsId: document.getElementById('cfg-googleAnalyticsId').value.trim(),
+      };
+      document.getElementById('config-json').textContent = JSON.stringify(cfg, null, 2);
+      document.getElementById('config-output').classList.remove('hidden');
+    });
+
+    document.getElementById('btn-load-config')?.addEventListener('click', async () => {
+      try {
+        const r = await fetch('/config.json');
+        const cfg = await r.json();
+        document.getElementById('cfg-siteName').value = cfg.siteName || '';
+        document.getElementById('cfg-phone').value = cfg.phone || '';
+        document.getElementById('cfg-phoneRaw').value = cfg.phoneRaw || '';
+        document.getElementById('cfg-whatsapp').value = cfg.whatsapp || '';
+        document.getElementById('cfg-whatsappRaw').value = cfg.whatsappRaw || '';
+        document.getElementById('cfg-address').value = cfg.address || '';
+        document.getElementById('cfg-workingHours').value = cfg.workingHours || '';
+        document.getElementById('cfg-formsubmitEmail').value = cfg.formsubmitEmail || '';
+        document.getElementById('cfg-servistakipUrl').value = cfg.servistakipUrl || '';
+        document.getElementById('cfg-googleAnalyticsId').value = cfg.googleAnalyticsId || '';
+      } catch (e) {
+        alert('config.json yüklenemedi. Dosya public/config.json konumunda olmalı.');
+      }
+    });
+
+    document.getElementById('btn-copy-config')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('config-json').textContent);
+      const btn = document.getElementById('btn-copy-config');
+      btn.textContent = 'Kopyalandı!';
+      setTimeout(() => { btn.textContent = 'Kopyala'; }, 2000);
+    });
+
+    // Blog form
+    document.getElementById('blog-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = document.getElementById('post-title').value.trim();
+      let slug = document.getElementById('post-slug').value.trim();
+      if (!slug) slug = slugify(title);
+      const excerpt = document.getElementById('post-excerpt').value.trim();
+      const date = document.getElementById('post-date').value;
+      const category = document.getElementById('post-category').value;
+      const noImage = document.getElementById('post-no-image').checked;
+      const image = noImage ? '' : document.getElementById('post-image').value.trim();
+      const content = document.getElementById('post-content').value.trim();
+      const dateFormatted = new Date(date + 'T12:00:00').toLocaleDateString('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' });
+      const escapeHtml = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      const imageBlock = image
+        ? `  <section class="section-padding bg-gradient-to-br from-primary to-blue-900">
+    <div class="container-custom">
+      <div class="max-w-3xl">
+        <div class="rounded-xl overflow-hidden mb-6">
+          <img src="${image}" alt="${escapeHtml(title)}" class="w-full h-auto object-cover" width="800" height="450" loading="eager" />
+        </div>
+        <time class="text-blue-300 text-sm font-medium">${dateFormatted}</time>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">${escapeHtml(title)}</h1>
+        <p class="text-blue-200 text-lg leading-relaxed">${escapeHtml(excerpt)}</p>
+      </div>
+    </div>
+  </section>`
+        : `  <section class="section-padding bg-gradient-to-br from-primary to-blue-900">
+    <div class="container-custom">
+      <div class="max-w-3xl">
+        <time class="text-blue-300 text-sm font-medium">${dateFormatted}</time>
+        <h1 class="text-3xl md:text-4xl font-bold text-white mt-2 mb-4">${escapeHtml(title)}</h1>
+        <p class="text-blue-200 text-lg leading-relaxed">${escapeHtml(excerpt)}</p>
+      </div>
+    </div>
+  </section>`;
+      const contentEscaped = content.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
+      const astroContent = `---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+
+const content = \`${contentEscaped}\`;
+---
+
+<BaseLayout
+  title="${title.replace(/"/g, '\\"')} | Esginler"
+  description="${excerpt.replace(/"/g, '\\"')}"
+  canonical="/blog/${slug}"
+>
+  <Breadcrumb items={[{ name: 'Blog', href: '/blog' }, { name: '${title.replace(/'/g, "\\'")}' }]} />
+
+${imageBlock}
+
+  <section class="section-padding">
+    <div class="container-custom">
+      <article class="max-w-3xl blog-content">
+        <Fragment set:html={content} />
+      </article>
+    </div>
+  </section>
+
+  <section class="section-padding bg-gradient-to-r from-accent to-orange-600">
+    <div class="container-custom text-center">
+      <h2 class="text-2xl font-bold text-white mb-4">Robot süpürgeniz arızalı mı?</h2>
+      <p class="text-orange-100 mb-6">Profesyonel teknik servis için hemen bizi arayın!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+902242112213" class="btn-secondary">Hemen Ara: 0224 211 22 13</a>
+        <a href="https://wa.me/905545354484" target="_blank" rel="noopener" class="btn-whatsapp">WhatsApp ile Yaz</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+`;
+      const jsonEntry = `  {
+    title: '${title.replace(/'/g, "\\'")}',
+    excerpt: '${excerpt.replace(/'/g, "\\'")}',
+    date: '${date}',
+    slug: '${slug}',
+    category: '${category}',
+  }`;
+      document.getElementById('out-slug').textContent = slug;
+      document.getElementById('output-astro').textContent = astroContent;
+      document.getElementById('output-json').textContent = jsonEntry;
+      document.getElementById('blog-output').classList.remove('hidden');
+      document.getElementById('blog-output').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('btn-copy-astro')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('output-astro').textContent);
+      const btn = document.getElementById('btn-copy-astro');
+      btn.textContent = 'Kopyalandı!';
+      setTimeout(() => { btn.textContent = 'Kopyala'; }, 2000);
+    });
+    document.getElementById('btn-copy-json')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('output-json').textContent);
+      const btn = document.getElementById('btn-copy-json');
+      btn.textContent = 'Kopyalandı!';
+      setTimeout(() => { btn.textContent = 'Kopyala'; }, 2000);
+    });
+
+    // Müşteri Yorumları
+    let reviewsList = [];
+    const reviewsListEl = document.getElementById('reviews-list');
+    const reviewsEmptyEl = document.getElementById('reviews-empty');
+
+    function renderReviewsList() {
+      if (!reviewsListEl) return;
+      reviewsListEl.innerHTML = reviewsList.map((r, i) => {
+        const stars = '★'.repeat(r.rating || 5) + '☆'.repeat(5 - (r.rating || 5));
+        return '<li class="flex flex-wrap items-start justify-between gap-3 p-4 bg-white border border-gray-200 rounded-xl">' +
+          '<div class="min-w-0 flex-1">' +
+          '<p class="font-semibold text-primary">' + (r.name || '').replace(/</g, '&lt;') + '</p>' +
+          '<p class="text-yellow-500 text-sm">' + stars + '</p>' +
+          '<p class="text-gray-600 text-sm mt-1">"' + (r.text || '').replace(/</g, '&lt;').replace(/"/g, '&quot;').slice(0, 120) + (r.text && r.text.length > 120 ? '…' : '') + '"</p>' +
+          (r.device ? '<p class="text-gray-400 text-xs mt-1">' + (r.device || '').replace(/</g, '&lt;') + '</p>' : '') +
+          '</div>' +
+          '<button type="button" class="reviews-delete-btn px-3 py-1.5 bg-red-100 text-red-700 text-sm font-medium rounded-lg hover:bg-red-200" data-index="' + i + '">Sil</button>' +
+          '</li>';
+      }).join('');
+      if (reviewsEmptyEl) reviewsEmptyEl.classList.toggle('hidden', reviewsList.length > 0);
+    }
+
+    document.getElementById('reviews-load-btn')?.addEventListener('click', async () => {
+      const status = document.getElementById('reviews-load-status');
+      status.textContent = 'Yükleniyor…';
+      const url = (typeof window !== 'undefined' && window.location?.origin) ? (window.location.origin + '/reviews.json') : '/reviews.json';
+      try {
+        const r = await fetch(url, { cache: 'no-store' });
+        if (!r.ok) throw new Error('Dosya bulunamadı');
+        const data = await r.json();
+        reviewsList = Array.isArray(data) ? data : [];
+        renderReviewsList();
+        status.textContent = reviewsList.length + ' yorum yüklendi.';
+        status.classList.remove('text-red-600');
+        setTimeout(() => { status.textContent = ''; }, 3000);
+      } catch (e) {
+        const defaults = [
+          { name: 'Mehmet Yılmaz', rating: 5, text: 'Roborock S7 cihazımın motoru arızalanmıştı. Aynı gün içinde tamir edildi, çok memnun kaldım. Teşekkürler Esginler Teknik!', device: 'Roborock S7' },
+          { name: 'Ayşe Kaya', rating: 5, text: 'Dreame L10 Pro bataryası şişmişti, orijinal batarya ile değiştirdiler. Fiyatı da gayet uygundu. Kesinlikle tavsiye ederim.', device: 'Dreame L10 Pro' },
+          { name: 'Emre Demir', rating: 5, text: 'Xiaomi robot süpürgemin sensörleri düzgün çalışmıyordu, LiDAR sensörünü tamir ettiler. Cihaz ilk günkü gibi çalışıyor.', device: 'Xiaomi Mi Robot Vacuum' },
+          { name: 'Fatma Özkan', rating: 5, text: 'iRobot Roomba cihazımın ana kartı yanmıştı. Başka yerde çözüm bulamadım ama Esginler hemen çözdü. Çok profesyonel bir ekip.', device: 'iRobot Roomba i7' },
+        ];
+        reviewsList = defaults;
+        renderReviewsList();
+        status.textContent = 'reviews.json bulunamadı; varsayılan 4 yorum listeye eklendi. Düzenleyip "reviews.json oluştur" ile kaydedebilirsiniz.';
+        status.classList.add('text-amber-700');
+      }
+    });
+
+    reviewsListEl?.addEventListener('click', (e) => {
+      const btn = e.target.closest('.reviews-delete-btn');
+      if (!btn) return;
+      const i = parseInt(btn.getAttribute('data-index'), 10);
+      if (!isNaN(i) && i >= 0 && i < reviewsList.length) {
+        reviewsList.splice(i, 1);
+        renderReviewsList();
+      }
+    });
+
+    document.getElementById('review-form')?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('review-name').value.trim();
+      const rating = parseInt(document.getElementById('review-rating').value, 10);
+      const text = document.getElementById('review-text').value.trim();
+      const device = document.getElementById('review-device').value.trim();
+      if (!name || !text) return;
+      reviewsList.push({ name, rating: rating || 5, text, device: device || '' });
+      renderReviewsList();
+      e.target.reset();
+      document.getElementById('review-rating').value = '5';
+    });
+
+    document.getElementById('reviews-generate-btn')?.addEventListener('click', () => {
+      const json = JSON.stringify(reviewsList, null, 2);
+      document.getElementById('reviews-json').textContent = json;
+      document.getElementById('reviews-output').classList.remove('hidden');
+      const blob = new Blob([json], { type: 'application/json' });
+      const a = document.getElementById('reviews-download-btn');
+      a.href = URL.createObjectURL(blob);
+      a.download = 'reviews.json';
+    });
+
+    document.getElementById('reviews-copy-btn')?.addEventListener('click', () => {
+      navigator.clipboard.writeText(document.getElementById('reviews-json').textContent);
+      const btn = document.getElementById('reviews-copy-btn');
+      btn.textContent = 'Kopyalandı!';
+      setTimeout(() => { btn.textContent = 'Kopyala'; }, 2000);
+    });
+  </script>
+</BaseLayout>

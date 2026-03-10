@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Mehmet Yılmaz",
+    "rating": 5,
+    "text": "Roborock S7 cihazımın motoru arızalanmıştı. Aynı gün içinde tamir edildi, çok memnun kaldım. Teşekkürler Esginler Teknik!",
+    "device": "Roborock S7"
+  },
+  {
+    "name": "Ayşe Kaya",
+    "rating": 5,
+    "text": "Dreame L10 Pro bataryası şişmişti, orijinal batarya ile değiştirdiler. Fiyatı da gayet uygundu. Kesinlikle tavsiye ederim.",
+    "device": "Dreame L10 Pro"
+  },
+  {
+    "name": "Emre Demir",
+    "rating": 5,
+    "text": "Xiaomi robot süpürgemin sensörleri düzgün çalışmıyordu, LiDAR sensörünü tamir ettiler. Cihaz ilk günkü gibi çalışıyor.",
+    "device": "Xiaomi Mi Robot Vacuum"
+  },
+  {
+    "name": "Fatma Özkan",
+    "rating": 5,
+    "text": "iRobot Roomba cihazımın ana kartı yanmıştı. Başka yerde çözüm bulamadım ama Esginler hemen çözdü. Çok profesyonel bir ekip.",
+    "device": "iRobot Roomba i7"
+  }
+]
